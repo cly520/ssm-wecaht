@@ -25,16 +25,16 @@ public class MenuManager {
 	public final static String REAL_URL="http://weixinguo.xicp.net/maven_weixin/"; //个人花生壳
 	//public final static String REAL_URL = "http://wxmobsa.yidatec.com/weixin/"; //正式号服务器	
 	
-	public final static String appId="wxe545a87dd58d472c";
-	public final static String appSecret = "8e7b1ee0710dbe4ba9fbcd93dc2321cf";
+	public final static String appId="wx679be1c1a9519c5c";
+	public final static String appSecret = "cf5421faa505fcd2b1e22eb10409f45d";
 	
 	public static void resultMenu(){
 		// 调用接口获取access_token
-		AccessTokenDTO at = WeixinUtil.getAccessToken(appId, appSecret);
+		AccessTokenDTO accessToken = WeixinUtil.getAccessToken(appId, appSecret);
 
-		if (null != at) {
+		if (null != accessToken) {
 			// 调用接口创建菜单
-			int result = WeixinUtil.createMenu(getMenu(), at.getToken());
+			int result = WeixinUtil.createMenu(getMenu(), accessToken.getToken());
 
 			// 判断菜单创建结果
 			if (0 == result)
@@ -50,11 +50,11 @@ public class MenuManager {
 		// 第三方用户唯一凭证密钥
 		String appSecret = MenuManager.appSecret;
 		// 调用接口获取access_token
-		AccessTokenDTO at = WeixinUtil.getAccessToken(appId, appSecret);
+		AccessTokenDTO accessToken = WeixinUtil.getAccessToken(appId, appSecret);
 
-		if (null != at) {
+		if (null != accessToken) {
 			// 调用接口创建菜单
-			int result = WeixinUtil.createMenu(getMenu(),at.getToken());
+			int result = WeixinUtil.createMenu(getMenu(),accessToken.getToken());
 
 			// 判断菜单创建结果
 			if (0 == result)
@@ -71,42 +71,50 @@ public class MenuManager {
 	 */
 	private static Menu getMenu() {
 
-		
 		ViewButton btn10 = new ViewButton();
-		btn10.setName("View菜单");
+			btn10.setName("会议发单");
 		btn10.setType("view");
-		btn10.setUrl("");
-		
+		btn10.setUrl("http://www.baidu.com");
+
+		CommonButton btn11 = new CommonButton();
+		btn11.setName("会议抢单");
+		btn11.setType("click");
+		btn11.setKey("11");
 		
 //-------------------------------------------------------
-		CommonButton btn20 = new CommonButton();
-		btn20.setName("事件菜单");
-		btn20.setType("click");
-		btn20.setKey("1");
-		
-		ViewButton btn21 = new ViewButton();
-		btn21.setName("菜单");
-		btn21.setType("view");
-		btn21.setUrl("https://www.baidu.com/");
+		ViewButton btn20 = new ViewButton();
+		btn20.setName("发单排行榜");
+		btn20.setType("view");
+		btn20.setUrl("http://www.baidu.com");
 
 //------------------------------------------------------------		
-		CommonButton btn31 = new CommonButton(); //返回图文消息
-		btn31.setName("");
-		btn31.setType("click");
-		btn31.setKey("");
+		ViewButton btn30 = new ViewButton();
+		btn30.setName("个人中心");
+		btn30.setType("view");
+		btn30.setUrl("http://www.baidu.com");
+
+		ViewButton btn31 = new ViewButton();
+		btn31.setName("版本信息");
+		btn31.setType("view");
+		btn31.setUrl("http://www.baidu.com");
+
+		CommonButton btn32 = new CommonButton();
+		btn32.setName("联系我们");
+		btn32.setType("click");
+		btn32.setKey("32");
 		
 		//###############################################一级子菜单
 		ComplexButton mainBtn1 = new ComplexButton();
-		mainBtn1.setName("一栏");
-		mainBtn1.setSub_button(new Button[] { btn10});
+		mainBtn1.setName("会议");
+		mainBtn1.setSub_button(new Button[] { btn10,btn11});
 
 		ComplexButton mainBtn2 = new ComplexButton();
-		mainBtn2.setName("二栏");  // 
-		mainBtn2.setSub_button(new Button[] { btn20,btn21});
+		mainBtn2.setName("公告栏");
+		mainBtn2.setSub_button(new Button[] { btn20});
 
 		ComplexButton mainBtn3 = new ComplexButton();
-		mainBtn3.setName("三栏");// btn31, btn32, btn33,
-		mainBtn3.setSub_button(new Button[] {btn31});
+		mainBtn3.setName("系统消息");
+		mainBtn3.setSub_button(new Button[] {btn30,btn31,btn32});
 
 		/**
 		 * 这是公众号目前的菜单结构，每个一级菜单都有二级菜单项<br>
