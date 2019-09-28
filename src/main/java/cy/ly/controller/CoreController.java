@@ -24,7 +24,7 @@ public class CoreController {
     /**
      * 确认请求来自微信服务器
      */
-    @RequestMapping(value = "weixin", method = RequestMethod.GET)
+    @RequestMapping(value = "/weixin", method = RequestMethod.GET)
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 微信加密签名
         String signature = request.getParameter("signature");
@@ -41,6 +41,7 @@ public class CoreController {
             out.print(echostr);
         }
         out.close();
+        out = null;
     }
 
     /**

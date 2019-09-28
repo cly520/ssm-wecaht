@@ -13,7 +13,7 @@ import javax.net.ssl.TrustManager;
 
 
 import cy.ly.dto.AccessTokenDTO;
-import cy.ly.dto.Menu;
+import cy.ly.menu.Menu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,6 @@
-package cy.ly.dto;
+package cy.ly.message;
+
+import cy.ly.dto.ArticleDTO;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class NewsMessage extends BaseMessage {
 	// 图文消息个数，限制为10条以内
 	private int ArticleCount;
 	// 多条图文消息信息，默认第一个item为大图
-	private List<Article> Articles;
+	private List<ArticleDTO> articleDTOS;
 
 	public int getArticleCount() {
 		return ArticleCount;
@@ -20,11 +22,11 @@ public class NewsMessage extends BaseMessage {
 		ArticleCount = articleCount;
 	}
 
-	public List<Article> getArticles() {
-		return Articles;
+	public List<ArticleDTO> getArticleDTOS() {
+		return articleDTOS;
 	}
 
-	public void setArticles(List<Article> articles) {
-		Articles = articles;
+	public void setArticleDTOS(List<ArticleDTO> articleDTOS) {
+		this.articleDTOS = articleDTOS;
 	}
 }

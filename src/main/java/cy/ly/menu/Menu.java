@@ -1,4 +1,6 @@
-package cy.ly.dto;
+package cy.ly.menu;
+
+import cy.ly.button.Button;
 
 /**
  * 菜单

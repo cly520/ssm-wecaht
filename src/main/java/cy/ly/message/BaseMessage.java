@@ -1,4 +1,4 @@
-package cy.ly.dto;
+package cy.ly.message;
 
 /**
  * 消息基类（公众帐号 -> 普通用户）

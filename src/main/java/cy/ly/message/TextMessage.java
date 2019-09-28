@@ -1,4 +1,4 @@
-package cy.ly.dto;
+package cy.ly.message;
 
 /**
  * 文本消息

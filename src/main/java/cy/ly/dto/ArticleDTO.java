@@ -3,7 +3,7 @@ package cy.ly.dto;
 /**
  * 图文model
  */
-public class Article {
+public class ArticleDTO {
 	// 图文消息名称
 	private String Title;
 	// 图文消息描述

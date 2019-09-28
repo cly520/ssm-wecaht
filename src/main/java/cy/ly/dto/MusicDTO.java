@@ -3,7 +3,7 @@ package cy.ly.dto;
 /**
  * 音乐model
  */
-public class Music {
+public class MusicDTO {
 	// 音乐名称
 	private String Title;
 	// 音乐描述

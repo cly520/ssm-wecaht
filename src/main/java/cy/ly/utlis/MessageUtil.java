@@ -8,10 +8,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import cy.ly.dto.Article;
-import cy.ly.dto.MusicMessage;
-import cy.ly.dto.NewsMessage;
-import cy.ly.dto.TextMessage;
+import cy.ly.dto.ArticleDTO;
+import cy.ly.message.MusicMessage;
+import cy.ly.message.NewsMessage;
+import cy.ly.message.TextMessage;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -159,7 +159,7 @@ public class MessageUtil {
 	 */
 	public static String newsMessageToXml(NewsMessage newsMessage) {
 		xstream.alias("xml", newsMessage.getClass());
-		xstream.alias("item", new Article().getClass());
+		xstream.alias("item", new ArticleDTO().getClass());
 		return xstream.toXML(newsMessage);
 	}
 
