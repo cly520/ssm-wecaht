@@ -17,7 +17,7 @@
        约定大于配置。
 
   -->
-    <context:component-scan base-package="cy.ly"
+    <context:component-scan base-package="cy.ly.service"
                             use-default-filters="true">
         <!-- exclude-filter是针对include-filter里的内容进行排除 -->
         <context:exclude-filter type="annotation"
