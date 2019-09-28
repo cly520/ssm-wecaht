@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.cy.ly.mappers.MeetinggrabMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.cy.ly.javaBean.Meetinggrab">
+<mapper namespace="cy.ly.mappers.MeetinggrabMapper">
+  <resultMap id="BaseResultMap" type="cy.ly.bean.Meetinggrab">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="create_date" jdbcType="VARCHAR" property="createDate" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     id, remark, create_date, grab_time, grab_status, status, uid, pid
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cy.ly.bean.MeetinggrabExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -96,13 +96,13 @@
     delete from meetinggrab
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample">
+  <delete id="deleteByExample" parameterType="cy.ly.bean.MeetinggrabExample">
     delete from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+  <insert id="insert" parameterType="cy.ly.bean.Meetinggrab">
     insert into meetinggrab (id, remark, create_date, 
       grab_time, grab_status, status, 
       uid, pid)
@@ -110,7 +110,7 @@
       #{grabTime,jdbcType=VARCHAR}, #{grabStatus,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
       #{uid,jdbcType=INTEGER}, #{pid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+  <insert id="insertSelective" parameterType="cy.ly.bean.Meetinggrab">
     insert into meetinggrab
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -165,7 +165,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="cy.ly.bean.MeetinggrabExample" resultType="java.lang.Integer">
     select count(*) from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -217,7 +217,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+  <update id="updateByPrimaryKeySelective" parameterType="cy.ly.bean.Meetinggrab">
     update meetinggrab
     <set>
       <if test="remark != null">
@@ -244,7 +244,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+  <update id="updateByPrimaryKey" parameterType="cy.ly.bean.Meetinggrab">
     update meetinggrab
     set remark = #{remark,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=VARCHAR},
@@ -255,275 +255,7 @@
       pid = #{pid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from meetinggrab
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <resultMap id="BaseResultMap" type="com.example.demo.cy.ly.javaBean.Meetinggrab">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
-    <result column="grab_time" jdbcType="VARCHAR" property="grabTime" />
-    <result column="grab_status" jdbcType="INTEGER" property="grabStatus" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="pid" jdbcType="VARCHAR" property="pid" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, remark, create_date, grab_time, grab_status, status, uid, pid
-  </sql>
-  <select id="selectByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from meetinggrab
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from meetinggrab
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from meetinggrab
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample">
-    delete from meetinggrab
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
-    insert into meetinggrab (id, remark, create_date, 
-      grab_time, grab_status, status, 
-      uid, pid)
-    values (#{id,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
-      #{grabTime,jdbcType=VARCHAR}, #{grabStatus,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
-      #{uid,jdbcType=INTEGER}, #{pid,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
-    insert into meetinggrab
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="grabTime != null">
-        grab_time,
-      </if>
-      <if test="grabStatus != null">
-        grab_status,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="pid != null">
-        pid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=VARCHAR},
-      </if>
-      <if test="grabTime != null">
-        #{grabTime,jdbcType=VARCHAR},
-      </if>
-      <if test="grabStatus != null">
-        #{grabStatus,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="pid != null">
-        #{pid,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultType="java.lang.Integer">
-    select count(*) from meetinggrab
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update meetinggrab
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createDate != null">
-        create_date = #{record.createDate,jdbcType=VARCHAR},
-      </if>
-      <if test="record.grabTime != null">
-        grab_time = #{record.grabTime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.grabStatus != null">
-        grab_status = #{record.grabStatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=INTEGER},
-      </if>
-      <if test="record.pid != null">
-        pid = #{record.pid,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update meetinggrab
-    set id = #{record.id,jdbcType=VARCHAR},
-      remark = #{record.remark,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=VARCHAR},
-      grab_time = #{record.grabTime,jdbcType=VARCHAR},
-      grab_status = #{record.grabStatus,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER},
-      uid = #{record.uid,jdbcType=INTEGER},
-      pid = #{record.pid,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
-    update meetinggrab
-    <set>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=VARCHAR},
-      </if>
-      <if test="grabTime != null">
-        grab_time = #{grabTime,jdbcType=VARCHAR},
-      </if>
-      <if test="grabStatus != null">
-        grab_status = #{grabStatus,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="pid != null">
-        pid = #{pid,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
-    update meetinggrab
-    set remark = #{remark,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=VARCHAR},
-      grab_time = #{grabTime,jdbcType=VARCHAR},
-      grab_status = #{grabStatus,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=INTEGER},
-      pid = #{pid,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="cy.ly.bean.MeetinggrabExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.cy.ly.mappers.MeetingpubMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.cy.ly.javaBean.Meetingpub">
+<mapper namespace="cy.ly.mappers.MeetingpubMapper">
+  <resultMap id="BaseResultMap" type="cy.ly.bean.Meetingpub">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="pcode" jdbcType="VARCHAR" property="pcode" />
     <result column="ptime" jdbcType="VARCHAR" property="ptime" />
@@ -74,7 +74,7 @@
   <sql id="Base_Column_List">
     id, pcode, ptime, ptitle, zone, remark, create_date, status, uid, tid
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetingpubExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="cy.ly.bean.MeetingpubExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -98,13 +98,13 @@
     delete from meetingpub
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetingpubExample">
+  <delete id="deleteByExample" parameterType="cy.ly.bean.MeetingpubExample">
     delete from meetingpub
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.demo.cy.ly.javaBean.Meetingpub">
+  <insert id="insert" parameterType="cy.ly.bean.Meetingpub">
     insert into meetingpub (id, pcode, ptime, 
       ptitle, zone, remark, 
       create_date, status, uid, 
@@ -114,7 +114,7 @@
       #{createDate,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
       #{tid,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.cy.ly.javaBean.Meetingpub">
+  <insert id="insertSelective" parameterType="cy.ly.bean.Meetingpub">
     insert into meetingpub
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -181,7 +181,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetingpubExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="cy.ly.bean.MeetingpubExample" resultType="java.lang.Integer">
     select count(*) from meetingpub
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -241,7 +241,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.cy.ly.javaBean.Meetingpub">
+  <update id="updateByPrimaryKeySelective" parameterType="cy.ly.bean.Meetingpub">
     update meetingpub
     <set>
       <if test="pcode != null">
@@ -274,7 +274,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.cy.ly.javaBean.Meetingpub">
+  <update id="updateByPrimaryKey" parameterType="cy.ly.bean.Meetingpub">
     update meetingpub
     set pcode = #{pcode,jdbcType=VARCHAR},
       ptime = #{ptime,jdbcType=VARCHAR},
@@ -287,307 +287,7 @@
       tid = #{tid,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.demo.cy.ly.javaBean.MeetingpubExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from meetingpub
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <resultMap id="BaseResultMap" type="com.example.demo.cy.ly.javaBean.Meetingpub">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="pcode" jdbcType="VARCHAR" property="pcode" />
-    <result column="ptime" jdbcType="VARCHAR" property="ptime" />
-    <result column="ptitle" jdbcType="VARCHAR" property="ptitle" />
-    <result column="zone" jdbcType="VARCHAR" property="zone" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="tid" jdbcType="INTEGER" property="tid" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, pcode, ptime, ptitle, zone, remark, create_date, status, uid, tid
-  </sql>
-  <select id="selectByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetingpubExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from meetingpub
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from meetingpub
-    where id = #{id,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from meetingpub
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetingpubExample">
-    delete from meetingpub
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.example.demo.cy.ly.javaBean.Meetingpub">
-    insert into meetingpub (id, pcode, ptime, 
-      ptitle, zone, remark, 
-      create_date, status, uid, 
-      tid)
-    values (#{id,jdbcType=VARCHAR}, #{pcode,jdbcType=VARCHAR}, #{ptime,jdbcType=VARCHAR}, 
-      #{ptitle,jdbcType=VARCHAR}, #{zone,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, 
-      #{tid,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.cy.ly.javaBean.Meetingpub">
-    insert into meetingpub
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="pcode != null">
-        pcode,
-      </if>
-      <if test="ptime != null">
-        ptime,
-      </if>
-      <if test="ptitle != null">
-        ptitle,
-      </if>
-      <if test="zone != null">
-        zone,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="tid != null">
-        tid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="pcode != null">
-        #{pcode,jdbcType=VARCHAR},
-      </if>
-      <if test="ptime != null">
-        #{ptime,jdbcType=VARCHAR},
-      </if>
-      <if test="ptitle != null">
-        #{ptitle,jdbcType=VARCHAR},
-      </if>
-      <if test="zone != null">
-        #{zone,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="tid != null">
-        #{tid,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetingpubExample" resultType="java.lang.Integer">
-    select count(*) from meetingpub
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update meetingpub
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=VARCHAR},
-      </if>
-      <if test="record.pcode != null">
-        pcode = #{record.pcode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ptime != null">
-        ptime = #{record.ptime,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ptitle != null">
-        ptitle = #{record.ptitle,jdbcType=VARCHAR},
-      </if>
-      <if test="record.zone != null">
-        zone = #{record.zone,jdbcType=VARCHAR},
-      </if>
-      <if test="record.remark != null">
-        remark = #{record.remark,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createDate != null">
-        create_date = #{record.createDate,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=INTEGER},
-      </if>
-      <if test="record.tid != null">
-        tid = #{record.tid,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update meetingpub
-    set id = #{record.id,jdbcType=VARCHAR},
-      pcode = #{record.pcode,jdbcType=VARCHAR},
-      ptime = #{record.ptime,jdbcType=VARCHAR},
-      ptitle = #{record.ptitle,jdbcType=VARCHAR},
-      zone = #{record.zone,jdbcType=VARCHAR},
-      remark = #{record.remark,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER},
-      uid = #{record.uid,jdbcType=INTEGER},
-      tid = #{record.tid,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.cy.ly.javaBean.Meetingpub">
-    update meetingpub
-    <set>
-      <if test="pcode != null">
-        pcode = #{pcode,jdbcType=VARCHAR},
-      </if>
-      <if test="ptime != null">
-        ptime = #{ptime,jdbcType=VARCHAR},
-      </if>
-      <if test="ptitle != null">
-        ptitle = #{ptitle,jdbcType=VARCHAR},
-      </if>
-      <if test="zone != null">
-        zone = #{zone,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="tid != null">
-        tid = #{tid,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.cy.ly.javaBean.Meetingpub">
-    update meetingpub
-    set pcode = #{pcode,jdbcType=VARCHAR},
-      ptime = #{ptime,jdbcType=VARCHAR},
-      ptitle = #{ptitle,jdbcType=VARCHAR},
-      zone = #{zone,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      uid = #{uid,jdbcType=INTEGER},
-      tid = #{tid,jdbcType=INTEGER}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.demo.cy.ly.javaBean.MeetingpubExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="cy.ly.bean.MeetingpubExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
