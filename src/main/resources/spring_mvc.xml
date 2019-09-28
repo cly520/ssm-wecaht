@@ -31,7 +31,9 @@
         RequestMappingHandlerAdapter     第一个是HandlerMapping的实现类，它会处理@RequestMapping
         注解，并将其注册到请求映射表中。     第二个是HandlerAdapter的实现类，它是处理请求的适配器，就是确定调用哪个类的哪个方法，并且构造方法参数，返回值。
         支持使用 @RequestBody 和 @ResponseBody 注解 -->
-    <mvc:default-servlet-handler />
+    <!--不拦截静态资源-->
+    <mvc:default-servlet-handler/>
+    <!--开启SpringMVC注解支持-->
     <mvc:annotation-driven />
 
 
