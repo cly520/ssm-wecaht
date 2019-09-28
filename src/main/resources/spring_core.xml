@@ -90,7 +90,7 @@
         <property name="configLocation" value="classpath:sqlMapConfig.xml"></property>
          -->
         <!-- 指定包的路径，在该内下的所有JAVA类，都会为其定义别名 别名：类名 -->
-        <property name="typeAliasesPackage" value="com.qfjy.project.meeting.bean"></property>
+        <!--<property name="typeAliasesPackage" value="com.qfjy.project.meeting.bean"></property>-->
         <!-- -->
         <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
     </bean>
@@ -99,7 +99,7 @@
     </bean>
     <!-- 自动扫描，将Mapper代理对象自动注入到Spring dao中 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cy.ly.mapper"></property>
+        <property name="basePackage" value="cy.ly.mappers"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
 

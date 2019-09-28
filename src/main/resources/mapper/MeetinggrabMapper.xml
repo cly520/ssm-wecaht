@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.demo.cy.ly.mappers.RoleMapper">
-  <resultMap id="BaseResultMap" type="com.example.demo.cy.ly.javaBean.Role">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="rname" jdbcType="VARCHAR" property="rname" />
+<mapper namespace="com.example.demo.cy.ly.mappers.MeetinggrabMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="sort_num" jdbcType="INTEGER" property="sortNum" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="grab_time" jdbcType="VARCHAR" property="grabTime" />
+    <result column="grab_status" jdbcType="INTEGER" property="grabStatus" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rname, remark, sort_num, status
+    id, remark, create_date, grab_time, grab_status, status, uid, pid
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.cy.ly.javaBean.RoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role
+    from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -83,88 +86,117 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from role
-    where id = #{id,jdbcType=INTEGER}
+    from meetinggrab
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from role
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from meetinggrab
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.cy.ly.javaBean.RoleExample">
-    delete from role
+  <delete id="deleteByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample">
+    delete from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.demo.cy.ly.javaBean.Role">
-    insert into role (id, rname, remark, 
-      sort_num, status)
-    values (#{id,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{sortNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    insert into meetinggrab (id, remark, create_date, 
+      grab_time, grab_status, status, 
+      uid, pid)
+    values (#{id,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
+      #{grabTime,jdbcType=VARCHAR}, #{grabStatus,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{pid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.cy.ly.javaBean.Role">
-    insert into role
+  <insert id="insertSelective" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    insert into meetinggrab
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="rname != null">
-        rname,
-      </if>
       <if test="remark != null">
         remark,
       </if>
-      <if test="sortNum != null">
-        sort_num,
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="grabTime != null">
+        grab_time,
+      </if>
+      <if test="grabStatus != null">
+        grab_status,
       </if>
       <if test="status != null">
         status,
       </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="rname != null">
-        #{rname,jdbcType=VARCHAR},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="sortNum != null">
-        #{sortNum,jdbcType=INTEGER},
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="grabTime != null">
+        #{grabTime,jdbcType=VARCHAR},
+      </if>
+      <if test="grabStatus != null">
+        #{grabStatus,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.cy.ly.javaBean.RoleExample" resultType="java.lang.Integer">
-    select count(*) from role
+  <select id="countByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultType="java.lang.Integer">
+    select count(*) from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update role
+    update meetinggrab
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.rname != null">
-        rname = #{record.rname,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.sortNum != null">
-        sort_num = #{record.sortNum,jdbcType=INTEGER},
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grabTime != null">
+        grab_time = #{record.grabTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grabStatus != null">
+        grab_status = #{record.grabStatus,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -172,49 +204,64 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update role
-    set id = #{record.id,jdbcType=INTEGER},
-      rname = #{record.rname,jdbcType=VARCHAR},
+    update meetinggrab
+    set id = #{record.id,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
-      sort_num = #{record.sortNum,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER}
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      grab_time = #{record.grabTime,jdbcType=VARCHAR},
+      grab_status = #{record.grabStatus,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.cy.ly.javaBean.Role">
-    update role
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    update meetinggrab
     <set>
-      <if test="rname != null">
-        rname = #{rname,jdbcType=VARCHAR},
-      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="sortNum != null">
-        sort_num = #{sortNum,jdbcType=INTEGER},
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="grabTime != null">
+        grab_time = #{grabTime,jdbcType=VARCHAR},
+      </if>
+      <if test="grabStatus != null">
+        grab_status = #{grabStatus,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.cy.ly.javaBean.Role">
-    update role
-    set rname = #{rname,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      sort_num = #{sortNum,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    update meetinggrab
+    set remark = #{remark,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      grab_time = #{grabTime,jdbcType=VARCHAR},
+      grab_status = #{grabStatus,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.demo.cy.ly.javaBean.RoleExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role
+    from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -222,12 +269,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <resultMap id="BaseResultMap" type="com.example.demo.cy.ly.javaBean.Role">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="rname" jdbcType="VARCHAR" property="rname" />
+  <resultMap id="BaseResultMap" type="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="sort_num" jdbcType="INTEGER" property="sortNum" />
+    <result column="create_date" jdbcType="VARCHAR" property="createDate" />
+    <result column="grab_time" jdbcType="VARCHAR" property="grabTime" />
+    <result column="grab_status" jdbcType="INTEGER" property="grabStatus" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -288,15 +338,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, rname, remark, sort_num, status
+    id, remark, create_date, grab_time, grab_status, status, uid, pid
   </sql>
-  <select id="selectByExample" parameterType="com.example.demo.cy.ly.javaBean.RoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role
+    from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -304,88 +354,117 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from role
-    where id = #{id,jdbcType=INTEGER}
+    from meetinggrab
+    where id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from role
-    where id = #{id,jdbcType=INTEGER}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from meetinggrab
+    where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.demo.cy.ly.javaBean.RoleExample">
-    delete from role
+  <delete id="deleteByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample">
+    delete from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.demo.cy.ly.javaBean.Role">
-    insert into role (id, rname, remark, 
-      sort_num, status)
-    values (#{id,jdbcType=INTEGER}, #{rname,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{sortNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER})
+  <insert id="insert" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    insert into meetinggrab (id, remark, create_date, 
+      grab_time, grab_status, status, 
+      uid, pid)
+    values (#{id,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
+      #{grabTime,jdbcType=VARCHAR}, #{grabStatus,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{uid,jdbcType=INTEGER}, #{pid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.demo.cy.ly.javaBean.Role">
-    insert into role
+  <insert id="insertSelective" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    insert into meetinggrab
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="rname != null">
-        rname,
-      </if>
       <if test="remark != null">
         remark,
       </if>
-      <if test="sortNum != null">
-        sort_num,
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="grabTime != null">
+        grab_time,
+      </if>
+      <if test="grabStatus != null">
+        grab_status,
       </if>
       <if test="status != null">
         status,
       </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="rname != null">
-        #{rname,jdbcType=VARCHAR},
+        #{id,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="sortNum != null">
-        #{sortNum,jdbcType=INTEGER},
+      <if test="createDate != null">
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="grabTime != null">
+        #{grabTime,jdbcType=VARCHAR},
+      </if>
+      <if test="grabStatus != null">
+        #{grabStatus,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.demo.cy.ly.javaBean.RoleExample" resultType="java.lang.Integer">
-    select count(*) from role
+  <select id="countByExample" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultType="java.lang.Integer">
+    select count(*) from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update role
+    update meetinggrab
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.rname != null">
-        rname = #{record.rname,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=VARCHAR},
       </if>
       <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.sortNum != null">
-        sort_num = #{record.sortNum,jdbcType=INTEGER},
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grabTime != null">
+        grab_time = #{record.grabTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grabStatus != null">
+        grab_status = #{record.grabStatus,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
+      </if>
+      <if test="record.pid != null">
+        pid = #{record.pid,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -393,49 +472,64 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update role
-    set id = #{record.id,jdbcType=INTEGER},
-      rname = #{record.rname,jdbcType=VARCHAR},
+    update meetinggrab
+    set id = #{record.id,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
-      sort_num = #{record.sortNum,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=INTEGER}
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      grab_time = #{record.grabTime,jdbcType=VARCHAR},
+      grab_status = #{record.grabStatus,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      uid = #{record.uid,jdbcType=INTEGER},
+      pid = #{record.pid,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.cy.ly.javaBean.Role">
-    update role
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    update meetinggrab
     <set>
-      <if test="rname != null">
-        rname = #{rname,jdbcType=VARCHAR},
-      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="sortNum != null">
-        sort_num = #{sortNum,jdbcType=INTEGER},
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="grabTime != null">
+        grab_time = #{grabTime,jdbcType=VARCHAR},
+      </if>
+      <if test="grabStatus != null">
+        grab_status = #{grabStatus,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.demo.cy.ly.javaBean.Role">
-    update role
-    set rname = #{rname,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      sort_num = #{sortNum,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.cy.ly.javaBean.Meetinggrab">
+    update meetinggrab
+    set remark = #{remark,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      grab_time = #{grabTime,jdbcType=VARCHAR},
+      grab_status = #{grabStatus,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.example.demo.cy.ly.javaBean.RoleExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.example.demo.cy.ly.javaBean.MeetinggrabExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from role
+    from meetinggrab
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
