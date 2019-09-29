@@ -4,7 +4,9 @@ import cy.ly.dto.ArticleDTO;
 import cy.ly.message.NewsMessage;
 import cy.ly.message.TextMessage;
 import cy.ly.service.CoreService;
+import cy.ly.service.UserInfoService;
 import cy.ly.utlis.MessageUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import java.util.Map;
 
 @Service
 public class CoreServiceImpl implements CoreService {
+    @Autowired
+    private UserInfoService userInfoService;
     public String processRequest(HttpServletRequest request) {
         String respMessage = null;
         try {
@@ -83,7 +87,7 @@ public class CoreServiceImpl implements CoreService {
                 String eventType = requestMap.get("Event");
                 // 订阅
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-
+                    userInfoService.getUserInfo(fromUserName);
                     respContent = "欢迎关注微信公众号";
                 }
                 // 取消订阅
