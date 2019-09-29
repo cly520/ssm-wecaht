@@ -87,7 +87,7 @@ public class CoreServiceImpl implements CoreService {
                 String eventType = requestMap.get("Event");
                 // 订阅
                 if (eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)) {
-                    userInfoService.getUserInfo(fromUserName);
+                    userInfoService.addWeiUsers(fromUserName);
                     respContent = "欢迎关注微信公众号";
                 }
                 // 取消订阅
